@@ -67,7 +67,7 @@ libssl()
     libssl_path=$PREFIX/3rd/libssl
     if [ ! -e $libssl_path ]; then
         git clone https://github.com/openssl/openssl.git $libssl_path
-        git -C $libssl_path checkout OpenSSL_1_1_0i
+        git -C $libssl_path checkout OpenSSL_1_1_1c
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
