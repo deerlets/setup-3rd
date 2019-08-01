@@ -56,8 +56,8 @@ libz()
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
-        cd $libz_path
-        ./configure --prefix=$PREFIX
+        mkdir -p $libz_path/build && cd $libz_path/build
+        ../configure --prefix=$PREFIX
         make && make install
     fi
 }
@@ -71,8 +71,8 @@ libssl()
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
-        cd $libssl_path
-        ./config no-asm shared --prefix=$PREFIX
+        mkdir -p $libssl_path/build && cd $libssl_path/build
+        ../config no-asm shared --prefix=$PREFIX
         sed -ie 's/-m64//' Makefile
         make && make install
     fi
@@ -87,9 +87,9 @@ libjson-c()
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}*)" ]; then
-        cd $libjson_c_path
         ./autogen.sh
-        ./configure --prefix=$PREFIX --host=$HOST
+        mkdir -p $libjson_c_path/build && cd $libjson_c_path/build
+        ../configure --prefix=$PREFIX --host=$HOST
         make && make install
     fi
 }
@@ -102,9 +102,9 @@ libsqlite3()
     fi
 
     if [ ! "$(find $PREFIX/lib -name ${FUNCNAME[0]}.*)" ]; then
-        cd $libsqlite3_path
         autoreconf --force --install
-        ./configure --prefix=$PREFIX --host=$HOST
+        mkdir -p $libsqlite3_path/build && cd $libsqlite3_path/build
+        ../configure --prefix=$PREFIX --host=$HOST
         make && make install
     fi
 }
@@ -134,8 +134,8 @@ libcurl()
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
-        cd  $libcurl_path
-        ./configure --prefix=$PREFIX --host=$HOST
+        mkdir -p $libcurl_path/build && cd $libcurl_path/build
+        ../configure --prefix=$PREFIX --host=$HOST
         make && make install
     fi
 }
@@ -165,9 +165,9 @@ libuv()
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
-        cd $libuv_path
         ./autogen.sh
-        ./configure --prefix=$PREFIX --host=$HOST
+        mkdir -p $libuv_path/build && cd $libuv_path/build
+        ../configure --prefix=$PREFIX --host=$HOST
         make && make install
     fi
 }
@@ -213,8 +213,8 @@ libmosquitto()
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
-        cd  $libmosquitto_path
-        cmake -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
+        mkdir -p $libmosquitto_path/build && cd $libmosquitto_path/build
+        cmake .. -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
     fi
 }
@@ -290,7 +290,8 @@ libmodbus()
         cd $libmodbus_path
         sed -ie 's/AC_FUNC_MALLOC/#&/' configure.ac
         ./autogen.sh
-        ./configure --prefix=$PREFIX --host=$HOST --disable-tests
+        mkdir -p $libmodbus_path/build && cd $libmodbus_path/build
+        ../configure --prefix=$PREFIX --host=$HOST --disable-tests
         cd src
         sed -ie 's/CFLAGS .*/& -I..\/include -L..\/lib -lzio/' Makefile
         make && make install
