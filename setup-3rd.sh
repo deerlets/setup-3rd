@@ -150,7 +150,7 @@ libzmq()
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
         mkdir -p $libzeromq_path/build && cd $libzeromq_path/build
-        cmake .. -DWITH_OPENPGM=1 -DBUILD_TESTS=off -DWITH_PERF_TOOL=off \
+        cmake .. -DWITH_OPENPGM=off -DBUILD_TESTS=off -DWITH_PERF_TOOL=off \
             -DCMAKE_INSTALL_PREFIX=$PREFIX $TOOLCHAIN
         make && make install
     fi
