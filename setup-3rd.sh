@@ -66,7 +66,7 @@ libssl()
 {
     libssl_path=$PREFIX/3rd/libssl
     if [ ! -e $libssl_path ]; then
-        git clone https://gitee.com/deerlets/openssl.git $libssl_path
+        git clone https://github.com/openssl/openssl.git $libssl_path
         git -C $libssl_path checkout OpenSSL_1_1_0i
     fi
 
@@ -113,7 +113,7 @@ liblua()
 {
     liblua_path=$PREFIX/3rd/liblua
     if [ ! -e $liblua_path ]; then
-        git clone https://gitee.com/deerlets/lua $liblua_path
+        git clone https://github.com/lua/lua $liblua_path
         git -C $liblua_path checkout v5.3.4
     fi
 
@@ -176,7 +176,7 @@ libwebsockets()
 {
     libwebsockets_path=$PREFIX/3rd/libwebsockets
     if [ ! -e $libwebsockets_path ]; then
-        git clone https://gitee.com/deerlets/libwebsockets.git $libwebsockets_path
+        git clone https://github.com/warmcat/libwebsockets.git $libwebsockets_path
         git -C $libwebsockets_path checkout v2.4.2
     fi
 
@@ -192,7 +192,7 @@ libopen62541()
 {
     libopen62541_path=$PREFIX/3rd/libopen62541
     if [ ! -e $libopen62541_path ]; then
-        git clone https://gitee.com/deerlets/open62541.git $libopen62541_path
+        git clone https://github.com/open62541/open62541.git $libopen62541_path
         git -C $libopen62541_path checkout v0.3-rc4
     fi
 
