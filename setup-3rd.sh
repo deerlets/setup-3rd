@@ -337,7 +337,7 @@ if [ "$ARCH" != "x86" ]; then
     do_build libzmq
     do_build libuv
     do_build libmosquitto
-    do_build cmocka
+    #do_build cmocka
 fi
 
 do_build liblua
