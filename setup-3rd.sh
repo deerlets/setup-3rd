@@ -52,7 +52,7 @@ libz()
     libz_path=$PREFIX/3rd/libz
     if [ ! -e $libz_path ]; then
         git clone https://github.com/madler/zlib.git $libz_path
-        git -C $libz_path checkout v1.2.9
+        cd $libz_path && git checkout v1.2.9
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -67,7 +67,7 @@ libssl()
     libssl_path=$PREFIX/3rd/libssl
     if [ ! -e $libssl_path ]; then
         git clone https://github.com/openssl/openssl.git $libssl_path
-        git -C $libssl_path checkout OpenSSL_1_1_1c
+        cd $libssl_path && git checkout OpenSSL_1_1_1c
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -83,7 +83,7 @@ libjson-c()
     libjson_c_path=$PREFIX/3rd/libjson_c
     if [ ! -e $libjson_c_path ]; then
         git clone https://github.com/json-c/json-c.git $libjson_c_path
-        git -C $libjson_c_path checkout json-c-0.13.1-20180305
+        cd $libjson_c_path && git checkout json-c-0.13.1-20180305
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}*)" ]; then
@@ -114,7 +114,7 @@ liblua()
     liblua_path=$PREFIX/3rd/liblua
     if [ ! -e $liblua_path ]; then
         git clone https://github.com/lua/lua $liblua_path
-        git -C $liblua_path checkout v5.3.4
+        cd $liblua_path && git checkout v5.3.4
     fi
 
     if [ ! "$(find $PREFIX/lib -name ${FUNCNAME[0]}.*)" ]; then
@@ -130,7 +130,7 @@ libcurl()
     libcurl_path=$PREFIX/3rd/libcurl
     if [ ! -e $libcurl_path ]; then
         git clone https://github.com/curl/curl.git $libcurl_path
-        git -C $libcurl_path checkout curl-7_61_0
+        cd $libcurl_path && git checkout curl-7_61_0
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -145,7 +145,7 @@ libzmq()
     libzeromq_path=$PREFIX/3rd/libzeromq
     if [ ! -e $libzeromq_path ]; then
         git clone https://github.com/zeromq/libzmq.git $libzeromq_path
-        git -C $libzeromq_path checkout v4.2.5
+        cd $libzeromq_path && git checkout v4.2.5
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -161,7 +161,7 @@ libuv()
     libuv_path=$PREFIX/3rd/libuv
     if [ ! -e $libuv_path ]; then
         git clone https://github.com/libuv/libuv.git $libuv_path
-        git -C $libuv_path checkout v1.20.0
+        cd $libuv_path && git checkout v1.20.0
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -177,7 +177,7 @@ libwebsockets()
     libwebsockets_path=$PREFIX/3rd/libwebsockets
     if [ ! -e $libwebsockets_path ]; then
         git clone https://github.com/warmcat/libwebsockets.git $libwebsockets_path
-        git -C $libwebsockets_path checkout v2.4.2
+        cd $libwebsockets_path && git checkout v2.4.2
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -193,7 +193,7 @@ libopen62541()
     libopen62541_path=$PREFIX/3rd/libopen62541
     if [ ! -e $libopen62541_path ]; then
         git clone https://github.com/open62541/open62541.git $libopen62541_path
-        git -C $libopen62541_path checkout v0.3-rc4
+        cd $libopen62541_path && git checkout v0.3-rc4
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -209,7 +209,7 @@ libmosquitto()
     libmosquitto_path=$PREFIX/3rd/libmosquitto
     if [ ! -e $libmosquitto_path ]; then
         git clone https://github.com/eclipse/mosquitto.git $libmosquitto_path
-        git -C $libmosquitto_path checkout v1.4.15
+        cd $libmosquitto_path && git checkout v1.4.15
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -281,7 +281,7 @@ libmodbus()
     libmodbus_path=$PREFIX/3rd/libmodbus
     if [ ! -e $libmodbus_path ]; then
         git clone https://gitee.com/deerlets/libmodbus.git $libmodbus_path
-        git -C $libmodbus_path checkout yuqing-dev
+        cd $libmodbus_path && git checkout yuqing-dev
         ln -s ../../include $libmodbus_path/include
         ln -s ../../lib $libmodbus_path/lib
     fi
@@ -319,7 +319,7 @@ libtuxplc()
     if [ ! -e $libtuxplc_path ]; then
         git clone $GIT_BASE/mirrors/TuxPLC.git $libtuxplc_path
     fi
-    git -C $libtuxplc_path checkout litai-dev
+    cd $libtuxplc_path && git checkout litai-dev
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
         mkdir -p $libtuxplc_path/build && cd $libtuxplc_path/build
