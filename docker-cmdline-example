@@ -3,10 +3,10 @@
 image ls -a |awk '{ if ($1 == "<none>") {print $3}}' |xargs docker image rm
 
 docker build . -t valley
-docker create -it -v ~/:/root/:cached -v /Volumes/:/Volumes/:cached --cap-add=SYS_PTRACE --name valley valley
+docker create -it -v ~/:/root/:cached -v /Volumes/:/Volumes/:cached --cap-add=SYS_PTRACE --name valley deerlets/valley
 docker create -it -p 18339:18339 -p 8080:8080 --cap-add=SYS_PTRACE --name valley valley
 docker start valley
 docker exec -it valley sh
 
-docker run --rm -it -v ~/docker-valley:/root/workspace:cached -p 18339:18339 -p 8080:8080 --cap-add=SYS_PTRACE valley bash
-docker run --rm -it -v ~/docker-valley:/root/workspace -p 18339:18339 -p 8080:8080 --cap-add=SYS_PTRACE valley bash
+docker run --rm -it -v ~/docker-valley:/root/workspace:cached -p 18339:18339 -p 8080:8080 --cap-add=SYS_PTRACE deerlets/valley bash
+docker run --rm -it -v ~/docker-valley:/root/workspace -p 18339:18339 -p 8080:8080 --cap-add=SYS_PTRACE deerlets/valley bash
