@@ -352,6 +352,3 @@ do_build libmodbus
 
 #do_build libnodave
 #do_build libtuxplc
-
-# clean
-rm -rf $PREFIX/3rd
