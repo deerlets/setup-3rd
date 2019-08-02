@@ -28,7 +28,7 @@ COPY nlohmann.tar.gz /
 RUN ["sh", "-c", "tar -xzf /nlohmann.tar.gz -C /usr/local/include/"]
 
 # clean
-RUN ["sh", "-c", "rm -f /setup-3rd.sh /nlohmann.tar.gz /usr/local/3rd"]
+RUN ["sh", "-c", "rm -rf /setup-3rd.sh /nlohmann.tar.gz /usr/local/3rd"]
 
 EXPOSE 8080
 WORKDIR /root/workspace
