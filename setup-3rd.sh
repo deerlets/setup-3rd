@@ -34,18 +34,21 @@ ARCH=x86 && [ -n "$2" ] && ARCH=$2
 # setup cross-chain
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 if [ "$ARCH" = "arm" ]; then
-    export CC=arm-linux-gnueabihf-gcc
-    export CXX=arm-linux-gnueabihf-g++
-    export STRIP=arm-linux-gnueabihf-strip
-    export AR=arm-linux-gnueabihf-ar
     HOST=arm-linux-gnueabihf
+    export CC=$HOST-gcc
+    export CXX=$HOST-g++
+    export CPP=$HOST-cpp
+    export AS=$HOST-as
+    export LD=$HOST-ld
+    export STRIP=$HOST-strip
     TOOLCHAIN="-DCMAKE_TOOLCHAIN_FILE=$SCRIPT_DIR/ToolChain.cmake"
-else
-    export CC=gcc
-    export CXX=g++
-    export STRIP=strip
-    export AR=ar
 fi
+
+export C_INCLUDE_PATH=$PREFIX/include
+export CPLUS_INCLUDE_PATH=$PREFIX/include
+export LD_LIBRARY_PATH=$PREFIX/lib
+mkdir -p $PREFIX/share/
+echo "CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib" > $PREFIX/share/config.site
 
 libz()
 {
@@ -138,6 +141,7 @@ libcurl()
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
+	[ ! -e $libcurl_path/configure ] && cd $libcurl_path && ./buildconf
         mkdir -p $libcurl_path/build && cd $libcurl_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
@@ -294,8 +298,6 @@ libmodbus()
     if [ ! -e $libmodbus_path ]; then
         git clone https://gitee.com/deerlets/libmodbus.git $libmodbus_path
         cd $libmodbus_path && git checkout yuqing-dev
-        ln -s ../../include $libmodbus_path/include
-        ln -s ../../lib $libmodbus_path/lib
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -353,7 +355,7 @@ if [ "$ARCH" != "x86" ]; then
     do_build libzmq
     do_build libuv
     do_build libmosquitto
-    #do_build cmocka
+    do_build cmocka
 fi
 
 do_build liblua
