@@ -59,6 +59,7 @@ libz()
         mkdir -p $libz_path/build && cd $libz_path/build
         ../configure --prefix=$PREFIX
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -75,6 +76,7 @@ libssl()
         ../config no-asm shared --prefix=$PREFIX
         sed -ie 's/-m64//' Makefile
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -91,6 +93,7 @@ libjson-c()
         mkdir -p $libjson_c_path/build && cd $libjson_c_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -106,6 +109,7 @@ libsqlite3()
         mkdir -p $libsqlite3_path/build && cd $libsqlite3_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -137,6 +141,7 @@ libcurl()
         mkdir -p $libcurl_path/build && cd $libcurl_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -153,6 +158,7 @@ libzmq()
         cmake .. -DWITH_OPENPGM=off -DBUILD_TESTS=off -DWITH_PERF_TOOL=off \
             -DCMAKE_INSTALL_PREFIX=$PREFIX $TOOLCHAIN
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -169,6 +175,7 @@ libuv()
         mkdir -p $libuv_path/build && cd $libuv_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -185,6 +192,7 @@ libwebsockets()
         cmake .. -DLWS_WITH_LIBUV=1 -DLWS_WITH_SSL=off -DLWS_WITHOUT_TESTAPPS=on \
             -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -201,6 +209,7 @@ libopen62541()
         cmake .. -DBUILD_SHARED_LIBS=ON -DUA_ENABLE_AMALGAMATION=ON \
             -DUA_LOGLEVEL=600 -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -216,6 +225,7 @@ libmosquitto()
         mkdir -p $libmosquitto_path/build && cd $libmosquitto_path/build
         cmake .. -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -245,6 +255,7 @@ libgossip()
         mkdir -p $libgossip_path/build && cd $libgossip_path/build
         cmake .. -DWITH_TESTS=off -DCMAKE_INSTALL_PREFIX=$PREFIX
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -273,6 +284,7 @@ libzio()
         mkdir -p $libzio_path/build && cd $libzio_path/build
         cmake .. -DWITH_TESTS=off -DCMAKE_INSTALL_PREFIX=$PREFIX
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -295,6 +307,7 @@ libmodbus()
         cd src
         sed -ie 's/CFLAGS .*/& -I..\/include -L..\/lib -lzio/' Makefile
         make && make install
+	[ $? -ne 0 ] && exit -1
         cd -
         sed -ie 's/#AC_FUNC_MALLOC/AC_FUNC_MALLOC/' configure.ac
     fi
@@ -311,6 +324,7 @@ libnodave()
         mkdir -p $libnodave_path/build && cd $libnodave_path/build
         cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX $TOOLCHAIN
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -326,6 +340,7 @@ libtuxplc()
         mkdir -p $libtuxplc_path/build && cd $libtuxplc_path/build
         cmake ../tuxeip -DWITH_TESTS=off -DCMAKE_INSTALL_PREFIX=$PREFIX $TOOLCHAIN
         make && make install
+	[ $? -ne 0 ] && exit -1
     fi
 }
 
