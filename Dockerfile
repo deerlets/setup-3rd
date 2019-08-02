@@ -1,6 +1,10 @@
 FROM alpine
 
-RUN sed -ie 's#http.*/alpine#https://mirrors.tuna.tsinghua.edu.cn/alpine#g' /etc/apk/repositories
+#RUN sed -ie 's#http.*/alpine#https://mirrors.tuna.tsinghua.edu.cn/alpine#g' /etc/apk/repositories
+RUN echo "https://mirrors.tuna.tsinghua.edu.cn/alpine/edge/main" > /etc/apk/repositories
+RUN echo "https://mirrors.tuna.tsinghua.edu.cn/alpine/edge/community" >> /etc/apk/repositories
+RUN echo "https://mirrors.tuna.tsinghua.edu.cn/alpine/edge/testing" >> /etc/apk/repositories
+
 RUN apk update
 RUN apk add bash vim git
 RUN apk add gcc g++ gdb cmake make libtool automake autoconf linux-headers
@@ -11,6 +15,7 @@ RUN apk add db-dev
 RUN apk add sqlite-dev
 RUN apk add json-c-dev
 RUN apk add cmocka-dev
+RUN apk add spdlog-dev
 RUN apk add mosquitto-dev
 RUn apk add py3-six
 
