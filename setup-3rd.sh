@@ -42,6 +42,13 @@ if [ "$ARCH" = "arm" ]; then
     export LD=$HOST-ld
     export STRIP=$HOST-strip
     TOOLCHAIN="-DCMAKE_TOOLCHAIN_FILE=$SCRIPT_DIR/ToolChain.cmake"
+else
+    export CC=gcc
+    export CXX=g++
+    export CPP=cpp
+    export AS=as
+    export LD=ld
+    export STRIP=strip
 fi
 
 export C_INCLUDE_PATH=$PREFIX/include
@@ -298,14 +305,15 @@ libmodbus()
     if [ ! -e $libmodbus_path ]; then
         git clone https://gitee.com/deerlets/libmodbus.git $libmodbus_path
         cd $libmodbus_path && git checkout yuqing-dev
+        ln -s ../../include $libmodbus_path/include
+        ln -s ../../lib $libmodbus_path/lib
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
         cd $libmodbus_path
         sed -ie 's/AC_FUNC_MALLOC/#&/' configure.ac
         ./autogen.sh
-        mkdir -p $libmodbus_path/build && cd $libmodbus_path/build
-        ../configure --prefix=$PREFIX --host=$HOST --disable-tests
+        ./configure --prefix=$PREFIX --host=$HOST --disable-tests
         cd src
         sed -ie 's/CFLAGS .*/& -I..\/include -L..\/lib -lzio/' Makefile
         make && make install
