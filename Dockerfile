@@ -4,6 +4,7 @@ RUN sed -ie 's#http.*/alpine#https://mirrors.tuna.tsinghua.edu.cn/alpine#g' /etc
 RUN apk update
 RUN apk add bash vim git
 RUN apk add gcc g++ gdb cmake make libtool automake autoconf linux-headers
+RUN apk add musl-dbg
 RUN apk add zlib-dev readline-dev openssl-dev zeromq-dev libuv-dev
 RUN apk add curl-dev
 RUN apk add db-dev
