@@ -270,6 +270,20 @@ spdlog()
     fi
 }
 
+zlog()
+{
+    zlog_path=$PREFIX/3rd/zlog
+    if [ ! -e $zlog_path ]; then
+        git clone https://github.com/HardySimpson/zlog.git $zlog_path
+    fi
+
+    if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
+        cd $zlog_path
+        make PREFIX=$PREIFX && make PREFIX=$PREFIX install
+        [ $? -ne 0 ] && exit -1
+    fi
+}
+
 libgossip()
 {
     libgossip_path=$PREFIX/3rd/libgossip
@@ -386,6 +400,7 @@ do_build liblua
 do_build libwebsockets
 do_build libopen62541
 
+do_build zlog
 do_build libgossip
 do_build zebra
 
