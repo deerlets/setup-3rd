@@ -1,6 +1,6 @@
 # docker cmdline example
 
-docker image ls -a |awk '{ if ($1 == "<none>") {print $3}}' |xargs docker image rm
+docker images |awk '{ if ($1 == "<none>") {print $3}}' |xargs docker rmi
 
 docker build . -t valley
 docker create -it -v ~/:/root/:cached -v /Volumes/:/Volumes/:cached --cap-add=SYS_PTRACE --name valley deerlets/valley
