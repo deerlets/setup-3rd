@@ -11,7 +11,7 @@ RUN apk add gcc g++ gdb cmake make libtool automake autoconf linux-headers
 RUN apk add musl-dbg
 RUN apk add zlib-dev readline-dev openssl-dev zeromq-dev libuv-dev
 RUN apk add curl-dev
-RUN apk add db-dev
+RUN apk add db-dev db-utils
 RUN apk add sqlite-dev
 RUN apk add json-c-dev
 RUN apk add cmocka-dev
