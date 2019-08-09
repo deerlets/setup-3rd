@@ -5,6 +5,9 @@ RUN sed -ie 's#http.*/alpine#https://mirrors.tuna.tsinghua.edu.cn/alpine#g' /etc
 #RUN echo "https://mirrors.tuna.tsinghua.edu.cn/alpine/edge/community" >> /etc/apk/repositories
 #RUN echo "https://mirrors.tuna.tsinghua.edu.cn/alpine/edge/testing" >> /etc/apk/repositories
 
+# env
+ENV LD_LIBRARY_PATH=/usr/local/lib64
+
 RUN apk update
 RUN apk add bash vim git
 RUN apk add gcc g++ gdb cmake make libtool automake autoconf linux-headers

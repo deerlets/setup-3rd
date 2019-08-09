@@ -62,11 +62,11 @@ libz()
 {
     libz_path=$PREFIX/3rd/libz
     libz_tar_file=$PREFIX/3rd/cache/zlib-1.2.9.tar.gz
-    if [ ! -e $libssl_tar_file  ]; then
+    if [ ! -e $libz_tar_file  ]; then
         curl https://codeload.github.com/madler/zlib/tar.gz/v1.2.9 -o $libz_tar_file
     fi
     if [ ! -e $libz_path ]; then
-    mkdir $libz_path && tar -xvzf $libz_tar_file -C $libz_path  --strip-components 1
+    	mkdir $libz_path && tar -xvzf $libz_tar_file -C $libz_path  --strip-components 1
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
