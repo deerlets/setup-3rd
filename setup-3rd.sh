@@ -66,14 +66,14 @@ libz()
         curl https://codeload.github.com/madler/zlib/tar.gz/v1.2.9 -o $libz_tar_file
     fi
     if [ ! -e $libz_path ]; then
-    	mkdir $libz_path && tar -xvzf $libz_tar_file -C $libz_path  --strip-components 1
+        mkdir $libz_path && tar -xvzf $libz_tar_file -C $libz_path  --strip-components 1
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
         mkdir -p $libz_path/build && cd $libz_path/build
         ../configure --prefix=$PREFIX
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -94,7 +94,7 @@ libssl()
         ../config no-asm shared --prefix=$PREFIX
         sed -ie 's/-m64//' Makefile
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -105,7 +105,7 @@ libjson-c()
     if [ ! -e $libjson_c_tar_file ]; then
        curl https://codeload.github.com/json-c/json-c/tar.gz/json-c-0.13.1-20180305 -o $libjson_c_tar_file
     fi
-    
+
     if [ ! -e $libjson_c_path ]; then
         mkdir $libjson_c_path && tar -xvzf $libjson_c_tar_file -C $libjson_c_path  --strip-components 1
     fi
@@ -115,7 +115,7 @@ libjson-c()
         mkdir -p $libjson_c_path/build && cd $libjson_c_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -126,7 +126,7 @@ libsqlite3()
     if [ ! -e $libsqlite3_tar_file ]; then
         curl https://codeload.github.com/mackyle/sqlite/tar.gz/version-3.29.0 -o $libsqlite3_tar_file
     fi
-    
+
     if [ ! -e $libsqlite3_path ]; then
         mkdir $libsqlite3_path && tar -xvzf $libsqlite3_tar_file -C $libsqlite3_path  --strip-components 1
     fi
@@ -136,7 +136,7 @@ libsqlite3()
         mkdir -p $libsqlite3_path/build && cd $libsqlite3_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -147,7 +147,7 @@ liblua()
     if [ ! -e $liblua_tar_file ]; then
         curl https://codeload.github.com/lua/lua/tar.gz/v5.3.4 -o $liblua_tar_file
     fi
-      
+
     if [ ! -e $liblua_path ]; then
         mkdir $liblua_path && tar -xvzf $liblua_tar_file -C $liblua_path  --strip-components 1
     fi
@@ -164,20 +164,20 @@ libcurl()
 {
     libcurl_path=$PREFIX/3rd/libcurl
     libcurl_tar_file=$PREFIX/3rd/cache/curl-7.61.0.tar.gz
-    if [ ! -e $libcurl_tar_file ]; then                   
+    if [ ! -e $libcurl_tar_file ]; then
         curl https://codeload.github.com/curl/curl/tar.gz/curl-7_61_0 -o $libcurl_tar_file
-    fi 
-        
+    fi
+
     if [ ! -e $libcurl_path ]; then
         mkdir $libcurl_path && tar -xvzf $libcurl_tar_file -C $libcurl_path  --strip-components 1
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
-	[ ! -e $libcurl_path/configure ] && cd $libcurl_path && ./buildconf
+    [ ! -e $libcurl_path/configure ] && cd $libcurl_path && ./buildconf
         mkdir -p $libcurl_path/build && cd $libcurl_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
-	[ $? -ne 0 ] && exit -1
+    [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -185,7 +185,7 @@ libzmq()
 {
     libzeromq_path=$PREFIX/3rd/libzeromq
     libzeromq_tar_file=$PREFIX/3rd/cache/libzmq-4.2.5.tar.gz
-    if [ ! -e $libzeromq_tar_file ]; then                   
+    if [ ! -e $libzeromq_tar_file ]; then
         curl https://codeload.github.com/zeromq/libzmq/tar.gz/v4.2.5 -o $libzeromq_tar_file
     fi
 
@@ -198,7 +198,7 @@ libzmq()
         cmake .. -DWITH_OPENPGM=off -DBUILD_TESTS=off -DWITH_PERF_TOOL=off \
             -DCMAKE_INSTALL_PREFIX=$PREFIX $TOOLCHAIN
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -209,7 +209,7 @@ libuv()
     if [ ! -e $libuv_tar_file ]; then
         curl https://codeload.github.com/libuv/libuv/tar.gz/v1.20.0 -o $libuv_tar_file
     fi
-    
+
     if [ ! -e $libuv_path ]; then
         mkdir $libuv_path && tar -xvzf $libuv_tar_file -C $libuv_path  --strip-components 1
     fi
@@ -219,7 +219,7 @@ libuv()
         mkdir -p $libuv_path/build && cd $libuv_path/build
         ../configure --prefix=$PREFIX --host=$HOST
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -239,7 +239,7 @@ libwebsockets()
         cmake .. -DLWS_WITH_LIBUV=1 -DLWS_WITH_SSL=off -DLWS_WITHOUT_TESTAPPS=on \
             -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -247,7 +247,7 @@ libopen62541()
 {
     libopen62541_path=$PREFIX/3rd/libopen62541
     libopen62541_tar_file=$PREFIX/3rd/cache/open62541-0.3.1.tar.gz
-    if [ ! -e $libopen62541_tar_file ]; then                               
+    if [ ! -e $libopen62541_tar_file ]; then
         curl https://codeload.github.com/open62541/open62541/tar.gz/v0.3.1 -o $libopen62541_tar_file
     fi
     if [ ! -e $libopen62541_path ]; then
@@ -259,7 +259,7 @@ libopen62541()
         cmake .. -DBUILD_SHARED_LIBS=ON -DUA_ENABLE_AMALGAMATION=ON \
             -DUA_LOGLEVEL=600 -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -267,7 +267,7 @@ libmosquitto()
 {
     libmosquitto_path=$PREFIX/3rd/libmosquitto
     libmosquitto_tar_file=$PREFIX/3rd/cache/mosquitto-1.6.4.tar.gz
-    if [ ! -e $libmosquitto_tar_file ]; then                               
+    if [ ! -e $libmosquitto_tar_file ]; then
         curl https://codeload.github.com/eclipse/mosquitto/tar.gz/v1.6.4 -o $libmosquitto_tar_file
     fi
     if [ ! -e $libmosquitto_path ]; then
@@ -278,7 +278,7 @@ libmosquitto()
         mkdir -p $libmosquitto_path/build && cd $libmosquitto_path/build
         cmake .. -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
-	[ $? -ne 0 ] && exit -1
+        [ $? -ne 0 ] && exit -1
     fi
 }
 
@@ -353,7 +353,7 @@ libzio()
 {
     libzio_path=$PREFIX/3rd/libzio
     if [ ! -e $libzio_path ]; then
-        git clone https://gitee.com/deerlets/libzio.git $libzio_path
+        git clone https://github.com/deerlets/libzio.git $libzio_path
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -368,7 +368,7 @@ libmodbus()
 {
     libmodbus_path=$PREFIX/3rd/libmodbus
     if [ ! -e $libmodbus_path ]; then
-        git clone https://gitee.com/deerlets/libmodbus.git $libmodbus_path
+        git clone https://github.com/deerlets/libmodbus.git $libmodbus_path
         cd $libmodbus_path && git checkout yuqing-dev
         ln -s ../../include $libmodbus_path/include
         ln -s ../../lib $libmodbus_path/lib
