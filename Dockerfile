@@ -9,7 +9,7 @@ RUN sed -ie 's#http.*/alpine#https://mirrors.tuna.tsinghua.edu.cn/alpine#g' /etc
 ENV LD_LIBRARY_PATH=/usr/local/lib64
 
 RUN apk update
-RUN apk add bash vim git
+RUN apk add bash vim git tmux
 RUN apk add gcc g++ gdb cmake make libtool automake autoconf linux-headers
 RUN apk add musl-dbg
 RUN apk add zlib-dev readline-dev openssl-dev zeromq-dev libuv-dev
@@ -24,6 +24,7 @@ RUN apk add py3-six
 RUN git clone https://github.com/yonzkon/sedi.git /root/.sedi
 RUN ln -sf .sedi/etc/.bash_profile /root/.bash_profile
 RUN ln -sf .sedi/etc/.bash_profile /root/.bashrc
+RUN ln -sf .sedi/etc/.tmux.conf /root/.tmux.conf
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # setup-3rd
