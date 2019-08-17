@@ -335,15 +335,16 @@ libgossip()
     fi
 }
 
-zebra()
+bonfire()
 {
-    zebra_path=$PREFIX/3rd/zebra
-    if [ ! -e $zebra_path ]; then
-        git clone https://github.com/deerlets/zebra.git $zebra_path
+    bonfire_path=$PREFIX/3rd/bonfire
+    if [ ! -e $bonfire_path ]; then
+        git clone https://github.com/deerlets/bonfire.git $bonfire_path
+        cd $bonfire_path && git checkout v2.0
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
-        mkdir -p $zebra_path/build && cd $zebra_path/build
+        mkdir -p $bonfire_path/build && cd $bonfire_path/build
         cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_DEBUG=on -DSPDNET_DEBUG=on
         make && make install
     fi
@@ -436,8 +437,7 @@ do_build libwebsockets
 do_build libopen62541
 
 do_build zlog
-do_build libgossip
-do_build zebra
+do_build bonfire
 
 do_build libzio
 do_build libmodbus
