@@ -27,13 +27,13 @@ RUN ln -sf .sedi/etc/.bash_profile /root/.bashrc
 RUN ln -sf .sedi/etc/.tmux.conf /root/.tmux.conf
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+# nlohmann
+COPY nlohmann.tar.gz /
+RUN ["sh", "-c", "mkdir -p /usr/local/include && tar -xzf /nlohmann.tar.gz -C /usr/local/include/"]
+
 # setup-3rd
 COPY setup-3rd.sh /
 RUN ["sh", "-c", "/setup-3rd.sh /usr/local"]
-
-# nlohmann
-COPY nlohmann.tar.gz /
-RUN ["sh", "-c", "tar -xzf /nlohmann.tar.gz -C /usr/local/include/"]
 
 # clean
 RUN ["sh", "-c", "rm -rf /setup-3rd.sh /nlohmann.tar.gz /usr/local/3rd"]
