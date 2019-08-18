@@ -226,9 +226,9 @@ libuv()
 libwebsockets()
 {
     libwebsockets_path=$PREFIX/3rd/libwebsockets
-    libwebsockets_tar_file=$PREFIX/3rd/cache/libwebsockets-2.4.2.tar.gz
+    libwebsockets_tar_file=$PREFIX/3rd/cache/libwebsockets-3.1.0.tar.gz
     if [ ! -e $libwebsockets_tar_file ]; then
-        curl https://codeload.github.com/warmcat/libwebsockets/tar.gz/v2.4.2 -o $libwebsockets_tar_file
+        curl https://codeload.github.com/warmcat/libwebsockets/tar.gz/v3.1.0 -o $libwebsockets_tar_file
     fi
     if [ ! -e $libwebsockets_path ]; then
         mkdir $libwebsockets_path && tar -xvzf $libwebsockets_tar_file -C $libwebsockets_path  --strip-components 1
@@ -428,12 +428,12 @@ if [ "$ARCH" != "x86" ]; then
     do_build libcurl
     do_build libzmq
     do_build libuv
+    do_build libwebsockets
     do_build libmosquitto
     do_build cmocka
 fi
 
 do_build liblua
-do_build libwebsockets
 do_build libopen62541
 
 do_build zlog
