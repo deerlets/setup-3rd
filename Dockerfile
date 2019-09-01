@@ -20,6 +20,7 @@ RUN apk add sqlite-dev
 RUN apk add cmocka-dev
 RUN apk add json-c-dev
 RUN apk add py3-six
+RUN apk add python nodejs npm
 
 RUN git clone https://github.com/yonzkon/sedi.git /root/.sedi
 RUN ln -sf .sedi/etc/.bash_profile /root/.bash_profile
