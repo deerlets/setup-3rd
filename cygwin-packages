@@ -1,0 +1,20 @@
+# Installed by setup-x86.exe of cygwin
+cmake
+db
+emacs-w32
+gcc-g++
+gdb
+git
+libdb-devel
+libreadline-devel
+libzmq-devel
+libzmq5
+make
+tmux
+vim
+
+# Installed from source code
+cmocka
+libwebsocket
+bonfire
+spider
