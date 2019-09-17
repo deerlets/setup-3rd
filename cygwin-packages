@@ -1,7 +1,6 @@
 # Installed by setup-x86.exe of cygwin
 cmake
 db
-emacs-w32
 gcc-g++
 gdb
 git
@@ -9,8 +8,8 @@ libdb-devel
 libreadline-devel
 libzmq-devel
 libzmq5
+libssl-devel
 make
-tmux
 vim
 
 # Installed from source code
