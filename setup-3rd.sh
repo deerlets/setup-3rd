@@ -340,7 +340,7 @@ bonfire()
     bonfire_path=$PREFIX/3rd/bonfire
     if [ ! -e $bonfire_path ]; then
         git clone https://github.com/deerlets/bonfire.git $bonfire_path
-        cd $bonfire_path && git checkout v2.0
+        cd $bonfire_path && git checkout v2.0.0
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
@@ -369,10 +369,12 @@ libmodbus()
 {
     libmodbus_path=$PREFIX/3rd/libmodbus
     if [ ! -e $libmodbus_path ]; then
-        git clone https://github.com/deerlets/libmodbus.git $libmodbus_path
-        cd $libmodbus_path && git checkout yuqing-dev
-        ln -s ../../include $libmodbus_path/include
-        ln -s ../../lib $libmodbus_path/lib
+        git clone https://github.com/stephane/libmodbus.git $libmodbus_path
+        cd $libmodbus_path && git checkout v3.1.6
+        #git clone https://github.com/deerlets/libmodbus.git $libmodbus_path
+        #cd $libmodbus_path && git checkout yuqing-dev
+        #ln -s ../../include $libmodbus_path/include
+        #ln -s ../../lib $libmodbus_path/lib
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
@@ -380,11 +382,11 @@ libmodbus()
         sed -ie 's/AC_FUNC_MALLOC/#&/' configure.ac
         ./autogen.sh
         ./configure --prefix=$PREFIX --host=$HOST --disable-tests
-        cd src
-        sed -ie 's/CFLAGS .*/& -I..\/include -L..\/lib -lzio/' Makefile
+        #cd src
+        #sed -ie 's/CFLAGS .*/& -I..\/include -L..\/lib -lzio/' Makefile
         make && make install
         [ $? -ne 0 ] && exit -1
-        cd -
+        #cd -
         sed -ie 's/#AC_FUNC_MALLOC/AC_FUNC_MALLOC/' configure.ac
     fi
 }
@@ -423,24 +425,22 @@ libtuxplc()
 if [ "$ARCH" != "x86" ]; then
     do_build libz
     do_build libssl
-    do_build libjson-c
-    do_build libsqlite3
-    do_build libcurl
+    #do_build libjson-c
+    #do_build libsqlite3
+    #do_build libcurl
     do_build libzmq
-    do_build libuv
-    do_build libwebsockets
-    do_build libmosquitto
-    do_build cmocka
+    #do_build libuv
+    #do_build libwebsockets
+    #do_build libmosquitto
+    #do_build cmocka
 fi
 
 do_build liblua
-do_build libopen62541
-
 do_build zlog
 do_build bonfire
 
-do_build libzio
+#do_build libzio
 do_build libmodbus
-
+#do_build libopen62541
 #do_build libnodave
 #do_build libtuxplc
