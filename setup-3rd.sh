@@ -60,8 +60,8 @@ mkdir -p $PREFIX/3rd/cache
 
 libz()
 {
-    libz_path=$PREFIX/3rd/libz
-    libz_tar_file=$PREFIX/3rd/cache/zlib-1.2.9.tar.gz
+    libz_path=$ORIGIN_PWD/3rd/libz
+    libz_tar_file=$ORIGIN_PWD/3rd/cache/zlib-1.2.9.tar.gz
     if [ ! -e $libz_tar_file  ]; then
         curl https://codeload.github.com/madler/zlib/tar.gz/v1.2.9 -o $libz_tar_file
     fi
@@ -79,8 +79,8 @@ libz()
 
 libssl()
 {
-    libssl_path=$PREFIX/3rd/libssli
-    libssl_tar_file=$PREFIX/3rd/cache/openssl-OpenSSL_1_1_1c.tar.gz
+    libssl_path=$ORIGIN_PWD/3rd/libssli
+    libssl_tar_file=$ORIGIN_PWD/3rd/cache/openssl-OpenSSL_1_1_1c.tar.gz
     if [ ! -e $libssl_tar_file ]; then
         curl https://codeload.github.com/openssl/openssl/tar.gz/OpenSSL_1_1_1c  -o $libssl_tar_file
     fi
@@ -100,8 +100,8 @@ libssl()
 
 libjson-c()
 {
-    libjson_c_path=$PREFIX/3rd/libjson_c
-    libjson_c_tar_file=$PREFIX/3rd/cache/json-c-json-c-0.13.1-20180305.tar.gz
+    libjson_c_path=$ORIGIN_PWD/3rd/libjson_c
+    libjson_c_tar_file=$ORIGIN_PWD/3rd/cache/json-c-json-c-0.13.1-20180305.tar.gz
     if [ ! -e $libjson_c_tar_file ]; then
        curl https://codeload.github.com/json-c/json-c/tar.gz/json-c-0.13.1-20180305 -o $libjson_c_tar_file
     fi
@@ -121,8 +121,8 @@ libjson-c()
 
 libsqlite3()
 {
-    libsqlite3_path=$PREFIX/3rd/libsqlite3
-    libsqlite3_tar_file=$PREFIX/3rd/cache/sqlite-version-3.29.0.tar.gz
+    libsqlite3_path=$ORIGIN_PWD/3rd/libsqlite3
+    libsqlite3_tar_file=$ORIGIN_PWD/3rd/cache/sqlite-version-3.29.0.tar.gz
     if [ ! -e $libsqlite3_tar_file ]; then
         curl https://codeload.github.com/mackyle/sqlite/tar.gz/version-3.29.0 -o $libsqlite3_tar_file
     fi
@@ -142,8 +142,8 @@ libsqlite3()
 
 liblua()
 {
-    liblua_path=$PREFIX/3rd/liblua
-    liblua_tar_file=$PREFIX/3rd/cache/lua-5.3.4.tar.gz
+    liblua_path=$ORIGIN_PWD/3rd/liblua
+    liblua_tar_file=$ORIGIN_PWD/3rd/cache/lua-5.3.4.tar.gz
     if [ ! -e $liblua_tar_file ]; then
         curl https://codeload.github.com/lua/lua/tar.gz/v5.3.4 -o $liblua_tar_file
     fi
@@ -162,8 +162,8 @@ liblua()
 
 libcurl()
 {
-    libcurl_path=$PREFIX/3rd/libcurl
-    libcurl_tar_file=$PREFIX/3rd/cache/curl-7.61.0.tar.gz
+    libcurl_path=$ORIGIN_PWD/3rd/libcurl
+    libcurl_tar_file=$ORIGIN_PWD/3rd/cache/curl-7.61.0.tar.gz
     if [ ! -e $libcurl_tar_file ]; then
         curl https://codeload.github.com/curl/curl/tar.gz/curl-7_61_0 -o $libcurl_tar_file
     fi
@@ -183,8 +183,8 @@ libcurl()
 
 libzmq()
 {
-    libzeromq_path=$PREFIX/3rd/libzeromq
-    libzeromq_tar_file=$PREFIX/3rd/cache/libzmq-4.2.5.tar.gz
+    libzeromq_path=$ORIGIN_PWD/3rd/libzeromq
+    libzeromq_tar_file=$ORIGIN_PWD/3rd/cache/libzmq-4.2.5.tar.gz
     if [ ! -e $libzeromq_tar_file ]; then
         curl https://codeload.github.com/zeromq/libzmq/tar.gz/v4.2.5 -o $libzeromq_tar_file
     fi
@@ -194,9 +194,8 @@ libzmq()
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
-        mkdir -p $libzeromq_path/build && cd $libzeromq_path/build
-        cmake .. -DWITH_OPENPGM=off -DBUILD_TESTS=off -DWITH_PERF_TOOL=off \
-            -DCMAKE_INSTALL_PREFIX=$PREFIX $TOOLCHAIN
+        cd $libzeromq_path && ./autogen.sh 
+	./configure --host=$HOST --prefix=$PREFIX --disable-curve-keygen --disable-perf
         make && make install
         [ $? -ne 0 ] && exit -1
     fi
@@ -204,8 +203,8 @@ libzmq()
 
 libuv()
 {
-    libuv_path=$PREFIX/3rd/libuv
-    libuv_tar_file=$PREFIX/3rd/cache/libuv-1.20.0.tar.gz
+    libuv_path=$ORIGIN_PWD/3rd/libuv
+    libuv_tar_file=$ORIGIN_PWD/3rd/cache/libuv-1.20.0.tar.gz
     if [ ! -e $libuv_tar_file ]; then
         curl https://codeload.github.com/libuv/libuv/tar.gz/v1.20.0 -o $libuv_tar_file
     fi
@@ -225,8 +224,8 @@ libuv()
 
 libwebsockets()
 {
-    libwebsockets_path=$PREFIX/3rd/libwebsockets
-    libwebsockets_tar_file=$PREFIX/3rd/cache/libwebsockets-3.1.0.tar.gz
+    libwebsockets_path=$ORIGIN_PWD/3rd/libwebsockets
+    libwebsockets_tar_file=$ORIGIN_PWD/3rd/cache/libwebsockets-3.1.0.tar.gz
     if [ ! -e $libwebsockets_tar_file ]; then
         curl https://codeload.github.com/warmcat/libwebsockets/tar.gz/v3.1.0 -o $libwebsockets_tar_file
     fi
@@ -236,7 +235,7 @@ libwebsockets()
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
         mkdir -p $libwebsockets_path/build && cd $libwebsockets_path/build
-        cmake .. -DLWS_WITH_LIBUV=1 -DLWS_WITH_SSL=off -DLWS_WITHOUT_TESTAPPS=on \
+        cmake .. -DLWS_WITH_SSL=off -DLWS_WITHOUT_TESTAPPS=on \
             -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
         [ $? -ne 0 ] && exit -1
@@ -245,8 +244,8 @@ libwebsockets()
 
 libopen62541()
 {
-    libopen62541_path=$PREFIX/3rd/libopen62541
-    libopen62541_tar_file=$PREFIX/3rd/cache/open62541-0.3.1.tar.gz
+    libopen62541_path=$ORIGIN_PWD/3rd/libopen62541
+    libopen62541_tar_file=$ORIGIN_PWD/3rd/cache/open62541-0.3.1.tar.gz
     if [ ! -e $libopen62541_tar_file ]; then
         curl https://codeload.github.com/open62541/open62541/tar.gz/v0.3.1 -o $libopen62541_tar_file
     fi
@@ -256,6 +255,7 @@ libopen62541()
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
         mkdir -p $libopen62541_path/build && cd $libopen62541_path/build
+        sed -ie 's/-Wall -Wextra -Wpedantic/-Wall -Wextra -Wno-jump-misses-init/g' ../CMakeLists.txt
         cmake .. -DBUILD_SHARED_LIBS=ON -DUA_ENABLE_AMALGAMATION=ON \
             -DUA_LOGLEVEL=600 -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
@@ -265,8 +265,8 @@ libopen62541()
 
 libmosquitto()
 {
-    libmosquitto_path=$PREFIX/3rd/libmosquitto
-    libmosquitto_tar_file=$PREFIX/3rd/cache/mosquitto-1.6.4.tar.gz
+    libmosquitto_path=$ORIGIN_PWD/3rd/libmosquitto
+    libmosquitto_tar_file=$ORIGIN_PWD/3rd/cache/mosquitto-1.6.4.tar.gz
     if [ ! -e $libmosquitto_tar_file ]; then
         curl https://codeload.github.com/eclipse/mosquitto/tar.gz/v1.6.4 -o $libmosquitto_tar_file
     fi
@@ -276,7 +276,7 @@ libmosquitto()
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name ${FUNCNAME[0]}.*)" ]; then
         mkdir -p $libmosquitto_path/build && cd $libmosquitto_path/build
-        cmake .. -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
+        cmake .. -DWITH_TLS=off -DDOCUMENTATION=off -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $TOOLCHAIN
         make && make install
         [ $? -ne 0 ] && exit -1
     fi
@@ -284,8 +284,8 @@ libmosquitto()
 
 cmocka()
 {
-    cmocka_path=$PREFIX/3rd/cmocka
-    cmocka_tar_file=$PREFIX/3rd/cache/cmocka-1.1.5.tar.gz
+    cmocka_path=$ORIGIN_PWD/3rd/cmocka
+    cmocka_tar_file=$ORIGIN_PWD/3rd/cache/cmocka-1.1.5.tar.gz
     if [ ! -e $cmocka_tar_file ]; then
         curl https://git.cryptomilk.org/projects/cmocka.git/snapshot/cmocka-1.1.5.tar.gz -o $cmocka_tar_file
     fi
@@ -304,8 +304,8 @@ cmocka()
 
 zlog()
 {
-    zlog_path=$PREFIX/3rd/zlog
-    zlog_tar_file=$PREFIX/3rd/cache/zlog-1.2.14.tar.gz
+    zlog_path=$ORIGIN_PWD/3rd/zlog
+    zlog_tar_file=$ORIGIN_PWD/3rd/cache/zlog-1.2.14.tar.gz
      if [ ! -e $zlog_tar_file ]; then
          curl https://codeload.github.com/HardySimpson/zlog/tar.gz/1.2.14 -o $zlog_tar_file
      fi
@@ -430,9 +430,9 @@ if [ "$ARCH" != "x86" ]; then
     #do_build libcurl
     do_build libzmq
     #do_build libuv
-    #do_build libwebsockets
-    #do_build libmosquitto
-    #do_build cmocka
+    do_build libwebsockets
+    do_build libmosquitto
+    do_build cmocka
 fi
 
 do_build liblua
@@ -441,6 +441,6 @@ do_build bonfire
 
 #do_build libzio
 do_build libmodbus
-#do_build libopen62541
+do_build libopen62541
 #do_build libnodave
 #do_build libtuxplc
