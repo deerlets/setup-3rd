@@ -1,19 +1,24 @@
 # Installed by setup-x86.exe of cygwin
 cmake
-db
+make
+automake
+autoconf
+libtool
 gcc-g++
-gdb
-git
-libdb-devel
 libreadline-devel
+libssl-devel
+libdb-devel
 libzmq-devel
 libzmq5
-libssl-devel
-make
+gdb
+git
 vim
+db
 
 # Installed from source code
 cmocka
 libwebsocket
 bonfire
-spider
+spider # only libspider
+libmodbus
+spider-apps
