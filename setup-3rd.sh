@@ -365,6 +365,22 @@ extlibc()
     fi
 }
 
+libspider()
+{
+    libspider_path=$PREFIX/3rd/libspider
+    if [ ! -e $libspider_path ]; then
+        git clone https://github.com/deerlets/spider.git $libspider_path
+        cd $libspider_path && git checkout v2.1.0
+    fi
+
+    if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
+        mkdir -p $libspider_path/build && cd $libspider_path/build
+        cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_DEBUG=on \
+            -DBUILD_CLI=off -DBUILD_SERVER=off -DBUILD_TESTS=off
+        make && make install
+    fi
+}
+
 libzio()
 {
     libzio_path=$PREFIX/3rd/libzio
@@ -454,6 +470,7 @@ do_build liblua
 do_build zlog
 do_build bonfire
 do_build extlibc
+do_build libspider
 
 #do_build libzio
 do_build libmodbus
