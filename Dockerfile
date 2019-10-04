@@ -19,7 +19,7 @@ RUN apk add db-dev db-utils
 RUN apk add sqlite-dev
 RUN apk add cmocka-dev
 RUN apk add json-c-dev
-RUN apk add py3-six
+RUN apk add py-six py2-six py3-six
 RUN apk add python nodejs npm
 
 RUN git clone https://github.com/yonzkon/sedi.git /root/.sedi

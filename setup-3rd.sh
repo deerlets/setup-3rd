@@ -56,7 +56,7 @@ export CPLUS_INCLUDE_PATH=$PREFIX/include
 export LD_LIBRARY_PATH=$PREFIX/lib
 mkdir -p $PREFIX/share/
 echo "CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib" > $PREFIX/share/config.site
-mkdir -p $PREFIX/3rd/cache
+mkdir -p $ORIGIN_PWD/3rd/cache
 
 libz()
 {
@@ -350,6 +350,21 @@ bonfire()
     fi
 }
 
+extlibc()
+{
+    extlibc_path=$PREFIX/3rd/extlibc
+    if [ ! -e $extlibc_path ]; then
+        git clone https://github.com/deerlets/extlibc.git $extlibc_path
+        cd $extlibc_path && git checkout v0.0
+    fi
+
+    if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
+        mkdir -p $extlibc_path/build && cd $extlibc_path/build
+        cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_DEBUG=on
+        make && make install
+    fi
+}
+
 libzio()
 {
     libzio_path=$PREFIX/3rd/libzio
@@ -438,6 +453,7 @@ fi
 do_build liblua
 do_build zlog
 do_build bonfire
+do_build extlibc
 
 #do_build libzio
 do_build libmodbus
