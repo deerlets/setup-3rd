@@ -245,9 +245,9 @@ libwebsockets()
 libopen62541()
 {
     libopen62541_path=$ORIGIN_PWD/3rd/libopen62541
-    libopen62541_tar_file=$ORIGIN_PWD/3rd/cache/open62541-0.3.1.tar.gz
+    libopen62541_tar_file=$ORIGIN_PWD/3rd/cache/open62541-1.2.4.tar.gz
     if [ ! -e $libopen62541_tar_file ]; then
-        curl https://codeload.github.com/open62541/open62541/tar.gz/v0.3.1 -o $libopen62541_tar_file
+        curl https://codeload.github.com/open62541/open62541/tar.gz/v1.2.4 -o $libopen62541_tar_file
     fi
     if [ ! -e $libopen62541_path ]; then
         mkdir $libopen62541_path && tar -xvzf $libopen62541_tar_file -C $libopen62541_path  --strip-components 1
@@ -340,7 +340,7 @@ bonfire()
     bonfire_path=$PREFIX/3rd/bonfire
     if [ ! -e $bonfire_path ]; then
         git clone https://github.com/deerlets/bonfire.git $bonfire_path
-        cd $bonfire_path && git checkout v2.0.0
+        cd $bonfire_path && git checkout master
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
@@ -355,7 +355,7 @@ extlibc()
     extlibc_path=$PREFIX/3rd/extlibc
     if [ ! -e $extlibc_path ]; then
         git clone https://github.com/deerlets/extlibc.git $extlibc_path
-        cd $extlibc_path && git checkout v0.0
+        cd $extlibc_path && git checkout master
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
@@ -370,7 +370,7 @@ libspider()
     libspider_path=$PREFIX/3rd/libspider
     if [ ! -e $libspider_path ]; then
         git clone https://github.com/deerlets/spider.git $libspider_path
-        cd $libspider_path && git checkout v2.1.0
+        cd $libspider_path && git checkout v2.1
     fi
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
@@ -466,14 +466,14 @@ if [ "$ARCH" != "x86" ]; then
     do_build cmocka
 fi
 
-do_build liblua
-do_build zlog
+#do_build liblua
+#do_build zlog
 do_build bonfire
 do_build extlibc
 do_build libspider
 
 #do_build libzio
-do_build libmodbus
+#do_build libmodbus
 do_build libopen62541
 #do_build libnodave
 #do_build libtuxplc

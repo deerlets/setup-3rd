@@ -13,14 +13,13 @@ RUN apk add bash vim git tmux
 RUN apk add gcc g++ gdb cmake make libtool automake autoconf linux-headers
 RUN apk add musl-dbg
 RUN apk add zlib-dev readline-dev openssl-dev
-RUN apk add zeromq-dev libuv-dev libwebsockets-dev
+RUN apk add zeromq-dev libuv-dev libwebsockets-dev libmodbus-dev
 RUN apk add curl-dev curl
 RUN apk add db-dev db-utils
 RUN apk add sqlite-dev
 RUN apk add cmocka-dev
-RUN apk add json-c-dev
-RUN apk add py-six py2-six py3-six
-RUN apk add python nodejs npm
+RUN apk add py-six py3-six
+RUN apk add nodejs npm
 
 RUN git clone https://github.com/yonzkon/sedi.git /root/.sedi
 RUN ln -sf .sedi/etc/.bash_profile /root/.bash_profile
