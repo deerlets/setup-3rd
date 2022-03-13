@@ -375,8 +375,7 @@ libspider()
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
         mkdir -p $libspider_path/build && cd $libspider_path/build
-        cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_DEBUG=on \
-            -DBUILD_CLI=off -DBUILD_SERVER=off -DBUILD_TESTS=off
+        cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_DEBUG=on -DBUILD_TESTS=off
         make && make install
     fi
 }

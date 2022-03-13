@@ -36,6 +36,10 @@ COPY setup-3rd.sh /
 RUN ["sh", "-c", "/setup-3rd.sh /usr/local"]
 #RUN ["sh", "-c", "cp -a /usr/local/lib64/* /usr/local/lib/"]
 
+# spider
+COPY spider.sh /
+RUN ["sh", "-c", "/spider.sh"]
+
 # clean
 RUN ["sh", "-c", "rm -rf /setup-3rd.sh /nlohmann.tar.gz /usr/local/3rd"]
 
