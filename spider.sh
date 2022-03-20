@@ -64,7 +64,7 @@ spider()
     git clone https://github.com/deerlets/spider.git $spider_path
     cd $spider_path && git checkout v2.1
     mkdir -p $spider_path/build && cd $spider_path/build
-    cmake .. -DBUILD_DEBUG=on -DBUILD_TESTS=off
+    cmake .. -DBUILD_DEBUG=on -DBUILD_TESTS=off -DBUILD_TAGFS=on
     make
 }
 
@@ -90,5 +90,5 @@ spider-web()
 }
 
 do_build spider
-do_build spider-apps
-do_build spider-web
+#do_build spider-apps
+#do_build spider-web

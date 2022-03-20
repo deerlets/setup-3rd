@@ -360,7 +360,7 @@ extlibc()
 
     if [ ! "$(find $PREFIX/lib -maxdepth 1 -name *${FUNCNAME[0]}.*)" ]; then
         mkdir -p $extlibc_path/build && cd $extlibc_path/build
-        cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_DEBUG=on
+        cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_DEBUG=on -DBUILD_EXT=on
         make && make install
     fi
 }
@@ -469,7 +469,7 @@ fi
 #do_build zlog
 do_build bonfire
 do_build extlibc
-do_build libspider
+#do_build libspider
 
 #do_build libzio
 #do_build libmodbus
